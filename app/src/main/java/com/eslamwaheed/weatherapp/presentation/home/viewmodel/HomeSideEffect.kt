@@ -1,3 +1,7 @@
 package com.eslamwaheed.weatherapp.presentation.home.viewmodel
 
-sealed class HomeSideEffect
+sealed class HomeSideEffect {
+    data object PermissionGranted : HomeSideEffect()
+
+    data object PermissionDenied : HomeSideEffect()
+}

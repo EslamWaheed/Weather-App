@@ -70,4 +70,6 @@ dependencies {
     //Chucker
     debugImplementation("com.github.chuckerteam.chucker:library:4.0.0")
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
+    //Google Location
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }
