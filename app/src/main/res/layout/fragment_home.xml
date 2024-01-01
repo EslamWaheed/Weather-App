@@ -4,12 +4,84 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
+    <!--    <com.google.android.material.textfield.TextInputEditText-->
+    <!--        android:id="@+id/tieSearch"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:hint="@string/search_hint"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/sivSearch"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_search" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtvTemp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:gravity="start"
+        android:text="18"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/gl50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/sivSearch" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/sivConditionIcon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/gl50"
+        app:layout_constraintTop_toBottomOf="@+id/sivSearch"
+        app:srcCompat="@color/black" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtvConditionText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Partly cloudy"
+        android:textSize="26sp"
+        app:layout_constraintEnd_toStartOf="@+id/gl50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mtvTemp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/mtvLocationName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:text="Cairo"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toStartOf="@+id/sivLocation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mtvConditionText" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/sivLocation"
+        android:layout_width="24dp"
+        android:layout_height="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/mtvLocationName"
+        app:layout_constraintStart_toEndOf="@+id/mtvLocationName"
+        app:layout_constraintTop_toTopOf="@+id/mtvLocationName"
+        app:srcCompat="@drawable/ic_location" />
 </androidx.constraintlayout.widget.ConstraintLayout>

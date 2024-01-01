@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.eslamwaheed.weatherapp.presentation.home.HomeFragment"
+        android:name="com.eslamwaheed.weatherapp.presentation.home.view.HomeFragment"
         android:label=""
         tools:layout="@layout/fragment_home" />
 </navigation>
