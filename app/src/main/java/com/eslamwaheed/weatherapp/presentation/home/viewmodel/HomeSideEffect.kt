@@ -4,4 +4,5 @@ sealed class HomeSideEffect {
     data object PermissionGranted : HomeSideEffect()
 
     data object PermissionDenied : HomeSideEffect()
+    data object NavigateToSearch : HomeSideEffect()
 }

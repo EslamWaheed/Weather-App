@@ -21,4 +21,8 @@ class HomeViewModel @Inject constructor() : ContainerHost<HomeState, HomeSideEff
             postSideEffect(HomeSideEffect.PermissionDenied)
         }
     }
+
+    fun onSearchClicked() = intent {
+        postSideEffect(HomeSideEffect.NavigateToSearch)
+    }
 }

@@ -11,6 +11,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.eslamwaheed.weatherapp.R
 import com.eslamwaheed.weatherapp.databinding.FragmentHomeBinding
 import com.eslamwaheed.weatherapp.presentation.home.viewmodel.HomeSideEffect
 import com.eslamwaheed.weatherapp.presentation.home.viewmodel.HomeState
@@ -51,8 +53,15 @@ class HomeFragment : Fragment() {
             state = ::handelState,
             sideEffect = ::handelSideEffect
         )
+        setListeners()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         checkPermission()
+    }
+
+    private fun setListeners() {
+        binding.sivSearch.setOnClickListener {
+            viewModel.onSearchClicked()
+        }
     }
 
     private fun handelState(state: HomeState) {
@@ -65,14 +74,17 @@ class HomeFragment : Fragment() {
             HomeSideEffect.PermissionGranted -> {
                 addLastLocationListener()
             }
+
+            HomeSideEffect.NavigateToSearch -> {
+                findNavController().navigate(R.id.actionHomeFragmentToSearchFragment)
+            }
         }
     }
 
     private fun checkPermission() {
         when {
             ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED -> {
                 viewModel.checkLocationPermission(true)
             }
@@ -90,9 +102,7 @@ class HomeFragment : Fragment() {
     private fun addLastLocationListener() {
         fusedLocationClient.lastLocation.addOnSuccessListener {
             Toast.makeText(
-                requireContext(),
-                "${it.latitude} ${it.longitude}",
-                Toast.LENGTH_LONG
+                requireContext(), "${it.latitude} ${it.longitude}", Toast.LENGTH_LONG
             ).show()
         }
     }

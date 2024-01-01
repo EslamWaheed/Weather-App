@@ -1,23 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--    <com.google.android.material.textfield.TextInputEditText-->
-    <!--        android:id="@+id/tieSearch"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:hint="@string/search_hint"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/sivSearch"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_margin="16dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_search" />
@@ -35,12 +27,13 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:gravity="start"
-        android:text="18"
+        android:maxLines="1"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/gl50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sivSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/sivSearch"
+        tools:text="18" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/sivConditionIcon"
@@ -57,11 +50,12 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="4dp"
-        android:text="Partly cloudy"
+        android:maxLines="1"
         android:textSize="26sp"
         app:layout_constraintEnd_toStartOf="@+id/gl50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mtvTemp" />
+        app:layout_constraintTop_toBottomOf="@+id/mtvTemp"
+        tools:text="Partly cloudy" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/mtvLocationName"
@@ -70,11 +64,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="4dp"
-        android:text="Cairo"
+        android:maxLines="1"
         android:textSize="22sp"
         app:layout_constraintEnd_toStartOf="@+id/sivLocation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mtvConditionText" />
+        app:layout_constraintTop_toBottomOf="@+id/mtvConditionText"
+        tools:text="Cairo" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/sivLocation"
