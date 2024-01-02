@@ -1,9 +1,12 @@
 package com.eslamwaheed.weatherapp.di
 
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.eslamwaheed.data.remote.WeatherApiServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -17,7 +20,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesOkHttpClient(): OkHttpClient {
+    fun providesOkHttpClient(chuckerInterceptor: ChuckerInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val url = chain
@@ -29,25 +32,15 @@ object NetworkModule {
                 chain.proceed(chain.request().newBuilder().url(url).build())
             }.connectTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
+            .addInterceptor(chuckerInterceptor)
             .build()
     }
 
-//    @Provides
-//    @Singleton
-//    fun providesContentType() = "application/json".toMediaType()
-//
-//    @Provides
-//    @Singleton
-//    fun providesJson() = Json {
-//        ignoreUnknownKeys = true
-//        encodeDefaults = true
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun providesJsonConverterFactory(json: Json, contentType: MediaType): Converter.Factory {
-//        return json.asConverterFactory(contentType)
-//    }
+    @Provides
+    @Singleton
+    fun providesChucker(@ApplicationContext context: Context): ChuckerInterceptor {
+        return ChuckerInterceptor(context)
+    }
 
     @Provides
     @Singleton
@@ -65,12 +58,3 @@ object NetworkModule {
         return retrofit.create(WeatherApiServices::class.java)
     }
 }
-
-//private fun provideKotlinSerialization(): Converter.Factory {
-//    val contentType = "application/json".toMediaType()
-//    val json = Json {
-//        ignoreUnknownKeys = true
-//        encodeDefaults = true
-//    }
-//    return json.asConverterFactory(contentType)
-//}
