@@ -3,6 +3,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -58,11 +59,10 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    //Kotlin Serialization
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     //Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
     //Orbit MVI
     implementation("org.orbit-mvi:orbit-core:6.1.0")
     implementation("org.orbit-mvi:orbit-viewmodel:6.1.0")
@@ -72,4 +72,8 @@ dependencies {
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
     //Google Location
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    //Domain Module
+    implementation(project(path = ":domain"))
+    //Data Module
+    implementation(project(path = ":data"))
 }
