@@ -1,3 +1,8 @@
 package com.eslamwaheed.weatherapp.presentation.search.viewmodel
 
-class SearchState
+import com.eslamwaheed.domain.entity.search.SearchResponse
+
+data class SearchState(
+    val isLoading: Boolean = false,
+    val searchResponse: SearchResponse? = null
+)

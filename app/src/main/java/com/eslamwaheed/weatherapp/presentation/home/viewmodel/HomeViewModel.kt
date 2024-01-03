@@ -31,6 +31,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun onLastLocationSuccess(latitude: Double, longitude: Double) = intent {
+        reduce { state.copy(isLoading = true) }
         realtimeDataUseCase.invoke("${latitude},${longitude}").fold(
             {
                 reduce {
@@ -41,5 +42,6 @@ class HomeViewModel @Inject constructor(
                 postSideEffect(HomeSideEffect.ShowError(it.message))
             }
         )
+        reduce { state.copy(isLoading = false) }
     }
 }

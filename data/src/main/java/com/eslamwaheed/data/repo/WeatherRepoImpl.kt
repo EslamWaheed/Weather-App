@@ -12,7 +12,7 @@ class WeatherRepoImpl @Inject constructor(private val apiServices: WeatherApiSer
         return apiServices.getRealtimeData(q)
     }
 
-    override suspend fun getSearchData(): SearchResponse {
-        TODO("Not yet implemented")
+    override suspend fun getSearchData(q: String): Result<SearchResponse> {
+        return apiServices.getSearchData(q)
     }
 }
