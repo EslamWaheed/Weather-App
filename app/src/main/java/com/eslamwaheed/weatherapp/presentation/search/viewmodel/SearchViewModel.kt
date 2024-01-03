@@ -37,7 +37,7 @@ class SearchViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private fun search(q: String) = intent {
+    fun search(q: String) = intent {
         reduce { state.copy(isLoading = true) }
         getSearchDataUseCase.invoke(q).fold(
             {
