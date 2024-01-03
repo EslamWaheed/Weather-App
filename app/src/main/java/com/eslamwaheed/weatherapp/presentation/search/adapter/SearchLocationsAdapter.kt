@@ -28,11 +28,14 @@ class SearchLocationsAdapter :
         holder.bind(item)
     }
 
-    inner class SearchLocationsViewHolder(val binding: ItemLocationBinding) :
+    inner class SearchLocationsViewHolder(private val binding: ItemLocationBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchResponseItem) {
             with(binding) {
                 mtvLocationName.text = item.name
+                root.setOnClickListener {
+                    onItemClick?.invoke(item)
+                }
             }
         }
     }

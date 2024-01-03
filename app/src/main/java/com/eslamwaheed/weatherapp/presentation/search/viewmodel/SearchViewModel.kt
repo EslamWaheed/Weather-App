@@ -55,6 +55,6 @@ class SearchViewModel @Inject constructor(
     }
 
     fun onSearchItemClicked(item: SearchResponseItem) = intent {
-
+        postSideEffect(SearchSideEffect.NavigateBackToHome(item))
     }
 }

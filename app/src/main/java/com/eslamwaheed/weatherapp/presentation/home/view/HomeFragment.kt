@@ -10,14 +10,17 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.load
 import com.eslamwaheed.weatherapp.R
 import com.eslamwaheed.weatherapp.databinding.FragmentHomeBinding
+import com.eslamwaheed.weatherapp.extensions.serializable
 import com.eslamwaheed.weatherapp.presentation.home.viewmodel.HomeSideEffect
 import com.eslamwaheed.weatherapp.presentation.home.viewmodel.HomeState
 import com.eslamwaheed.weatherapp.presentation.home.viewmodel.HomeViewModel
+import com.eslamwaheed.weatherapp.presentation.search.view.SearchFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,6 +63,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun setListeners() {
+        setFragmentResultListener(SearchFragment.itemKey) { _, bundle ->
+            viewModel.onSearchResultBack(bundle.serializable(SearchFragment.itemSearchKey))
+        }
         binding.sivSearch.setOnClickListener {
             viewModel.onSearchClicked()
         }

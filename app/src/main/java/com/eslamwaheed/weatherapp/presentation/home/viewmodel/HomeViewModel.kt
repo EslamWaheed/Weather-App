@@ -1,6 +1,7 @@
 package com.eslamwaheed.weatherapp.presentation.home.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.eslamwaheed.domain.entity.search.SearchResponseItem
 import com.eslamwaheed.domain.usecase.GetRealtimeDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.orbitmvi.orbit.Container
@@ -30,7 +31,7 @@ class HomeViewModel @Inject constructor(
         postSideEffect(HomeSideEffect.NavigateToSearch)
     }
 
-    fun onLastLocationSuccess(latitude: Double, longitude: Double) = intent {
+    fun onLastLocationSuccess(latitude: Double?, longitude: Double?) = intent {
         reduce { state.copy(isLoading = true) }
         realtimeDataUseCase.invoke("${latitude},${longitude}").fold(
             {
@@ -43,5 +44,9 @@ class HomeViewModel @Inject constructor(
             }
         )
         reduce { state.copy(isLoading = false) }
+    }
+
+    fun onSearchResultBack(item: SearchResponseItem?) = intent {
+        onLastLocationSuccess(item?.lat, item?.lon)
     }
 }
