@@ -72,7 +72,13 @@ dependencies {
     //Google Location
     implementation("com.google.android.gms:play-services-location:21.0.1")
     //Coil
-    implementation ("io.coil-kt:coil:2.4.0")
+    implementation("io.coil-kt:coil:2.4.0")
+    //Fixture
+    testImplementation("com.appmattus.fixture:fixture:1.2.0")
+    //Mockito
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
+    //Mockk
+    testImplementation("io.mockk:mockk:1.13.5")
     //Domain Module
     implementation(project(path = ":domain"))
     //Data Module
