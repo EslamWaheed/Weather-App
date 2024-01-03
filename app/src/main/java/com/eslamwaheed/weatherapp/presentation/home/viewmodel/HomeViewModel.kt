@@ -7,6 +7,7 @@ import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
 import org.orbitmvi.orbit.syntax.simple.postSideEffect
+import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import javax.inject.Inject
 
@@ -15,9 +16,7 @@ class HomeViewModel @Inject constructor(
     private val realtimeDataUseCase: GetRealtimeDataUseCase
 ) : ContainerHost<HomeState, HomeSideEffect>, ViewModel() {
 
-    override val container: Container<HomeState, HomeSideEffect> = container(HomeState()) {
-        getRealtimeData("cairo")
-    }
+    override val container: Container<HomeState, HomeSideEffect> = container(HomeState())
 
     fun checkLocationPermission(it: Boolean) = intent {
         if (it) {
@@ -31,13 +30,15 @@ class HomeViewModel @Inject constructor(
         postSideEffect(HomeSideEffect.NavigateToSearch)
     }
 
-    private fun getRealtimeData(q: String) = intent {
-        realtimeDataUseCase.invoke(q).fold(
+    fun onLastLocationSuccess(latitude: Double, longitude: Double) = intent {
+        realtimeDataUseCase.invoke("${latitude},${longitude}").fold(
             {
-
+                reduce {
+                    state.copy(realtimeResponse = it)
+                }
             },
             {
-
+                postSideEffect(HomeSideEffect.ShowError(it.message))
             }
         )
     }

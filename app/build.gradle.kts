@@ -71,6 +71,8 @@ dependencies {
     releaseImplementation("com.github.chuckerteam.chucker:library-no-op:4.0.0")
     //Google Location
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    //Coil
+    implementation ("io.coil-kt:coil:2.4.0")
     //Domain Module
     implementation(project(path = ":domain"))
     //Data Module

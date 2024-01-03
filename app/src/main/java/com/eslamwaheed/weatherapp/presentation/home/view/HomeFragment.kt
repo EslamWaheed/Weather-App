@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import coil.load
 import com.eslamwaheed.weatherapp.R
 import com.eslamwaheed.weatherapp.databinding.FragmentHomeBinding
 import com.eslamwaheed.weatherapp.presentation.home.viewmodel.HomeSideEffect
@@ -65,7 +66,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun handelState(state: HomeState) {
-
+        with(binding) {
+            with(state) {
+                mtvTemp.text = realtimeResponse?.current?.tempC.toString() + " °C"
+                mtvConditionText.text = realtimeResponse?.current?.condition?.text
+                mtvLocationName.text = realtimeResponse?.location?.name
+                sivConditionIcon.load("https:" + realtimeResponse?.current?.condition?.icon)
+            }
+        }
     }
 
     private fun handelSideEffect(sideEffect: HomeSideEffect) {
@@ -77,6 +85,10 @@ class HomeFragment : Fragment() {
 
             HomeSideEffect.NavigateToSearch -> {
                 findNavController().navigate(R.id.actionHomeFragmentToSearchFragment)
+            }
+
+            is HomeSideEffect.ShowError -> {
+                Toast.makeText(requireContext(), sideEffect.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -101,9 +113,7 @@ class HomeFragment : Fragment() {
 
     private fun addLastLocationListener() {
         fusedLocationClient.lastLocation.addOnSuccessListener {
-            Toast.makeText(
-                requireContext(), "${it.latitude} ${it.longitude}", Toast.LENGTH_LONG
-            ).show()
+            viewModel.onLastLocationSuccess(it.latitude, it.longitude)
         }
     }
 

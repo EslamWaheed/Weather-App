@@ -1,28 +1,51 @@
 package com.eslamwaheed.domain.entity.realtime
 
-
+import com.google.gson.annotations.SerializedName
 data class Current(
+    @SerializedName("last_updated_epoch")
     val lastUpdatedEpoch: Int,
+    @SerializedName("last_updated")
     val lastUpdated: String,
+    @SerializedName("temp_c")
     val tempC: Double,
+    @SerializedName("temp_f")
     val tempF: Double,
+    @SerializedName("is_day")
     val isDay: Int,
+    @SerializedName("condition")
     val condition: Condition,
+    @SerializedName("wind_mph")
     val windMph: Double,
+    @SerializedName("wind_kph")
     val windKph: Double,
-    val windDegree: Int,
+    @SerializedName("wind_degree")
+    val windDegree: Double,
+    @SerializedName("wind_dir")
     val windDir: String,
-    val pressureMb: Int,
+    @SerializedName("pressure_mb")
+    val pressureMb: Double,
+    @SerializedName("pressure_in")
     val pressureIn: Double,
-    val precipMm: Int,
-    val precipIn: Int,
+    @SerializedName("precip_mm")
+    val precipMm: Double,
+    @SerializedName("precip_in")
+    val precipIn: Double,
+    @SerializedName("humidity")
     val humidity: Int,
+    @SerializedName("cloud")
     val cloud: Int,
+    @SerializedName("feelslike_c")
     val feelslikeC: Double,
+    @SerializedName("feelslike_f")
     val feelslikeF: Double,
-    val visKm: Int,
-    val visMiles: Int,
-    val uv: Int,
+    @SerializedName("vis_km")
+    val visKm: Double,
+    @SerializedName("vis_miles")
+    val visMiles: Double,
+    @SerializedName("uv")
+    val uv: Double,
+    @SerializedName("gust_mph")
     val gustMph: Double,
-    val gustKph: Int
+    @SerializedName("gust_kph")
+    val gustKph: Double
 )
