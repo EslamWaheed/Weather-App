@@ -32,6 +32,13 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getRealtimeData(q: String) = intent {
-        realtimeDataUseCase.invoke(q)
+        realtimeDataUseCase.invoke(q).fold(
+            {
+
+            },
+            {
+
+            }
+        )
     }
 }

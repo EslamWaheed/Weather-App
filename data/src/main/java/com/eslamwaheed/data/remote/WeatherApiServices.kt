@@ -5,7 +5,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface WeatherApiServices {
-
     @GET("current.json")
-    suspend fun getRealtimeData(@Query("q") q: String): RealtimeResponse
+    suspend fun getRealtimeData(@Query("q") q: String): Result<RealtimeResponse>
 }

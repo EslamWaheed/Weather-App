@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class WeatherRepoImpl @Inject constructor(private val apiServices: WeatherApiServices) :
     WeatherRepo {
-    override suspend fun getRealtimeData(q: String): RealtimeResponse {
+    override suspend fun getRealtimeData(q: String): Result<RealtimeResponse> {
         return apiServices.getRealtimeData(q)
     }
 

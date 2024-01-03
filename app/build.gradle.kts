@@ -75,4 +75,6 @@ dependencies {
     implementation(project(path = ":domain"))
     //Data Module
     implementation(project(path = ":data"))
+    //Network Module
+    implementation(project(path = ":network"))
 }

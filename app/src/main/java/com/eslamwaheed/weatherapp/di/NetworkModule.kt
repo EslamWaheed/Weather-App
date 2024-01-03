@@ -9,6 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -44,11 +45,21 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    fun providesResultCallAdapter(): CallAdapter.Factory {
+        return com.eslamwaheed.network.networkerrors.ResultCallAdapterFactory()
+    }
+
+    @Provides
+    @Singleton
+    fun providesRetrofit(
+        okHttpClient: OkHttpClient,
+        resultCallAdapterFactory: com.eslamwaheed.network.networkerrors.ResultCallAdapterFactory
+    ): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.weatherapi.com/v1/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(resultCallAdapterFactory)
             .build()
     }
 
